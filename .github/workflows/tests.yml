@@ -35,8 +35,16 @@ jobs:
     # if: failure()
       uses: actions/upload-artifact@v4
       with: 
-             name: test-result
-             path: target/reports
+        name: test-result
+        path: target/reports
+             
+    - name: Deploy to Github Pages 
+      if: success()                        
+      uses: peaceiris/actions/actions-gh-pages@v4
+      with:   
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: target/reports
+             
            
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
